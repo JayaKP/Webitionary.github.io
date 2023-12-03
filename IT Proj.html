@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dictionary Website:Webitionary</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Webitionary</h1>
+
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="input-group mb-3">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search for a word">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" onclick="searchDictionary()">LOOK UP!</button>
+        </div>
+      </div>
+
+      <div id="resultContainer"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Dummy dictionary data
+  const dictionary = [
+    { word: 'sesquipedalian', definition: 'characterized by long words ' },
+    { word: 'Information Technology', definition: 'the study or use of systems (especially computers and telecommunications) for storing, retrieving, and sending information' },
+    { word: 'computer', definition: 'An electronic device for storing and processing data' },
+    { word: 'acme', definition: 'pinnacle'},
+    { word: 'nadir', definition: 'lowest point'},
+    { word: 'alleviate', definition: 'lessen'},
+    { word: 'vegan', definition: 'a person who does not eat any food derived from animals and who typically does not use other animal products'},
+    { word: 'abnegation', definition: 'self-denial'},
+    { word: 'siesta', definition: 'afternoon sleep'},
+    { word: 'leverage', definition: 'making maximum use of something/ clout'},
+    { word: 'idyllic', definition: 'picturesque'},
+  
+  ];
+
+  function searchDictionary() {
+    const searchTerm = $('#searchInput').val().toLowerCase();
+    const resultContainer = $('#resultContainer');
+    resultContainer.empty();
+
+    const results = dictionary.filter(entry => entry.word.toLowerCase().includes(searchTerm));
+
+    if (results.length === 0) {
+      resultContainer.append('<p>No results found</p>');
+    } else {
+      results.forEach(entry => {
+        const card = `
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title">${entry.word}</h5>
+              <p class="card-text">${entry.definition}</p>
+            </div>
+          </div>
+        `;
+        resultContainer.append(card);
+      });
+    }
+  }
+</script>
+
+</body>
+</html>
+

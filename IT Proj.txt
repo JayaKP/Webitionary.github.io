@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dictionary Website</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Dictionary</h1>
+
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="input-group mb-3">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search for a word">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" onclick="searchDictionary()">Search</button>
+        </div>
+      </div>
+
+      <div id="resultContainer"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Dummy dictionary data
+  const dictionary = [
+    { word: 'apple', definition: 'A round fruit with red or green skin and a whitish interior' },
+    { word: 'banana', definition: 'A long, curved fruit with a yellow skin' },
+    { word: 'computer', definition: 'An electronic device for storing and processing data' },
+    // Add more entries as needed
+  ];
+
+  function searchDictionary() {
+    const searchTerm = $('#searchInput').val().toLowerCase();
+    const resultContainer = $('#resultContainer');
+    resultContainer.empty();
+
+    const results = dictionary.filter(entry => entry.word.toLowerCase().includes(searchTerm));
+
+    if (results.length === 0) {
+      resultContainer.append('<p>No results found</p>');
+    } else {
+      results.forEach(entry => {
+        const card = `
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title">${entry.word}</h5>
+              <p class="card-text">${entry.definition}</p>
+            </div>
+          </div>
+        `;
+        resultContainer.append(card);
+      });
+    }
+  }
+</script>
+
+</body>
+</html>
+
